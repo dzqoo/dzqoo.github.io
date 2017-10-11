@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="理论知识," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="都真全的blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="介绍MR的基本架构">
+<meta name="keywords" content="理论知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop 学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/05/07/hadoop/index.html">
+<meta property="og:site_name" content="都真全的blog">
+<meta property="og:description" content="介绍MR的基本架构">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-11T09:04:02.453Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop 学习笔记">
+<meta name="twitter:description" content="介绍MR的基本架构">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/07/hadoop/"/>
+
+
+
+
+
+  <title>Hadoop 学习笔记 | 都真全的blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">都真全的blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/07/hadoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dzq.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="都真全的blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hadoop 学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-07T21:19:00+08:00">
+                2017-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  介绍MR的基本架构
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="MR架构"><a href="#MR架构" class="headerlink" title="MR架构"></a>MR架构</h1><h2 id="一、主要组成部分及任务执行流程"><a href="#一、主要组成部分及任务执行流程" class="headerlink" title="一、主要组成部分及任务执行流程"></a>一、主要组成部分及任务执行流程</h2><ol>
+<li>主要组成部分<br>  Job Client：接收用户提交的程序<pre><code>JobTracker: 初始化任务，任务调度
+TaskTracker: 任务实际执行
+</code></pre></li>
+<li>任务执行流程<ul>
+<li>JobClient 向JobTracker请求一个新的jobID</li>
+<li>检查作业输出说明</li>
+<li>计算作业输出划分split</li>
+<li>将运行作业所需要的资源（作业的jar文件、配置文件、计算所得的输入划分）复制到一个以作业ID 命名的目录中JobTracker的文件系统</li>
+<li>通过调用JobTracker的submitJob()方法，告诉JobTracker作业准备执行</li>
+<li>JobTracker接受到submitJob方法调用后，把次调用放到一个内部队列中，交由作业调度器进行调度，并对其进行初始化</li>
+<li>创建运行任务列表，作业调度去首先从共享文件系统中获取JobClient已经计算好的输入划分信息，然后为每一个划分创建一个Map任务（一个split对应一个map，有多少个split就有多少map）</li>
+<li>TaskTracker执行一个简单的循环，定期发送心跳（heatbeat）调用JobTracker</li>
+</ul>
+</li>
+</ol>
+<h2 id="二、Map-Shuffle"><a href="#二、Map-Shuffle" class="headerlink" title="二、Map Shuffle"></a>二、Map Shuffle</h2><ol>
+<li>输入<br>  在map task执行时，其输入来源HDFS的block，map task值读取split。split与bloack的对应关系可能是多对一，默认是一对一</li>
+<li>切分<br>  决定于当前的mapper的part交给哪个reduce的方法：mapreduce提供的Partitioner接口，对key进行hash后，再以reducetask数量取模，然后到执行的job上。<pre><code>然后将数据鞋屋内存缓冲区中，缓冲区的作用是批量手机map结果，减少磁盘IO的影响。key/value对已经partition的结果都会写入缓冲区。写入之前，key与value值都会被序列化成字节数组。
+</code></pre></li>
+<li><p>溢写<br>  由于内存缓冲区的大小限制（默认是100MB），当map task输出结果过很多时就可能发生内存溢出，所以需要在一定条件下降缓冲区的数据临时写入磁盘，然后重新利用这块缓冲区。这个从内存往磁盘写数据的过程就被称为溢写（spill）</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">        Combiner 将相同key的key/value对加起来，减少以写splil到磁盘的数据量</div></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>merge<br>  map很大时，每次溢写会产生一个spill_file，这样会有多个spill_file，而最终的输出只有一个文件，在最终输出之前对对多个中间过程产生的溢写文件进行合并，此过程就是merge</p>
+</li>
+</ol>
+<h2 id="三、Reduce-Shuffle"><a href="#三、Reduce-Shuffle" class="headerlink" title="三、Reduce Shuffle"></a>三、Reduce Shuffle</h2><ol>
+<li>copy<br>  Reduce进程启动一些数据copy线程（Fetcher），通过HTTP方式请求map task所在的TaskTracker获取map task的输出文件。</li>
+<li>merge<br>  copy过来的数据会先放入内存缓冲区中，这里的缓冲区大小要比map端的更为灵活，它是基于JVM的heap size设置的，因为shuffle阶段Reducer不运行，所以应该把绝大部分内存都给Shuffle用。merge有三种形式：1）内存到内存2）内存到磁盘3）磁盘到磁盘。当内存中的数据量到达一定阈值，就启动内存到磁盘的merge。与map端类似，这也是溢写过程，这个过程中如果设置有Combiner，也是会启用的，然后在磁盘中生成众多溢写文件。第二种merge方式一直在运行，直到没有map端的数据时才结束，然后启动第三种磁盘到磁盘的merge方式生成最终的那个文件</li>
+<li>reducer的输入<br>  merge的最后会成一个文件，大多数情况下存在于磁盘中，但是需要将其放入内存中。当reducer输入文件已定，整个shuffle阶段才算结束。然后就是Reducer执行，把结果放到HDFS上。</li>
+</ol>
+<h2 id="四、YARN优于MapReduce的地方"><a href="#四、YARN优于MapReduce的地方" class="headerlink" title="四、YARN优于MapReduce的地方"></a>四、YARN优于MapReduce的地方</h2><ol>
+<li>原MapReduce框架的不足<ul>
+<li>JobTracker是集群事务的集中处理点，存在单点故障</li>
+<li>JobTracker需要完成的任务太多，既要维护job的状态又要维护job的task的状态，造成过多的资源消耗</li>
+<li>在TaskTracker端，用map/reduce作为资源的表示过于简单，没有考虑到cpu、内存等资源情况，当把两个需要消耗大内存的task调度到一起。很容易出现OOM</li>
+<li>把资源强制划分为map/reduce slot，当只有map task时，reduce slot不能用，当只有reduce task时，map slot不能用，很容易造成资源利用不足。</li>
+</ul>
+</li>
+<li>YARN牛逼的地方<br>  基本的思想是将JobTracker的部分职责分配到TaskTracker上，这里的JobTracker被ApplicationMaster代替，TaskTracker被NodeManager代替，同时有一个全局的ResourceManager以主要后台进程的形式运行，它通常在专用机器上运行，在各种竞争的应用程序之间仲裁可用的集群资源。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/理论知识/" rel="tag"># 理论知识</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/07/HDFS/" rel="next" title="HDFS 学习笔记">
+                <i class="fa fa-chevron-left"></i> HDFS 学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/11/hive/" rel="prev" title="Hive 学习笔记">
+                Hive 学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/dzq.png"
+                alt="Mr Du" />
+            
+              <p class="site-author-name" itemprop="name">Mr Du</p>
+              <p class="site-description motion-element" itemprop="description">talk is cheap，show me the code</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MR架构"><span class="nav-number">1.</span> <span class="nav-text">MR架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、主要组成部分及任务执行流程"><span class="nav-number">1.1.</span> <span class="nav-text">一、主要组成部分及任务执行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Map-Shuffle"><span class="nav-number">1.2.</span> <span class="nav-text">二、Map Shuffle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Reduce-Shuffle"><span class="nav-number">1.3.</span> <span class="nav-text">三、Reduce Shuffle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、YARN优于MapReduce的地方"><span class="nav-number">1.4.</span> <span class="nav-text">四、YARN优于MapReduce的地方</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr Du</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

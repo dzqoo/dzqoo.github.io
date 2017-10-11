@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>都真全的blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-10-11T08:50:17.662Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Mr Du</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>URL 访问网站的整个过程</title>
+    <link href="http://yoursite.com/2017/08/31/url%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2017/08/31/url访问网站过程详解/</id>
+    <published>2017-08-31T01:35:00.000Z</published>
+    <updated>2017-10-11T08:50:17.662Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="URL访问网站"><a href="#URL访问网站" class="headerlink" title="URL访问网站"></a>URL访问网站</h1><ol><li><p>本地过程</p><p>若DNS缓存中没有相关数据，则浏览器先向DNS服务器发出DNS请求，返回DNS对应的IP地址</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">DNS请求阶段：</div><div class="line">DNS服务单元生成DNS报文—&gt;UDP协议单元-&gt;IP协议单元-&gt;数据帧，这个过程包含了ARP解析</div><div class="line">DNS服务器接收阶段：</div><div class="line">接收到数据帧-&gt;IP协议单元-&gt;UDP协议单元-&gt;DNS服务单元将域名解析成ip地址</div><div class="line">DNS回应阶段：</div><div class="line">DNS回应报文-&gt;UDP协议单元-&gt;IP协议单元-&gt;数据帧(MAC)-&gt;请求域名解析的主机</div><div class="line">DNS解析结果接收阶段：</div><div class="line">数据帧-&gt;IP协议单元-&gt;UDP协议单元-&gt;DNS-&gt;浏览器</div></pre></td></tr></table></figure></li><li><p>浏览器与目标服务器建立TCP连接：三次握手</p><ul><li><p>浏览器想服务器发送TCP连接请求报文，请求TCP报文中的SYN标志位被设置为1，表示连接请求（<strong>第一次握手</strong>）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP请求报文-&gt;IP-&gt;MAC-&gt;网关-&gt;请求服务器</div></pre></td></tr></table></figure></li><li><p>服务器收到数据帧，传送到上层的IP，TCP，TCP协议单元回应请求应答报文</p></li><li><p>请求应答TCP报文中的SYN和ACK标志位俊被设置成1，表示连接请求应答（<strong>第二次握手</strong>）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP请求应答报文-&gt;IP-&gt;MAC-&gt;网关-&gt;请求主机</div></pre></td></tr></table></figure></li><li><p>请求主机收到数据帧，发送到上层的IP，TCP，TCP协议单元会回应请求确认报文</p></li><li><p>请求应答TCP报文中的ACK标志位被设置成1，表示连接请求报文（<strong>第三次握手</strong>）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP请求确认报文-&gt;IP-&gt;MAC-&gt;网关-&gt;目标服务器</div></pre></td></tr></table></figure></li><li><p>目标服务器收到数据帧-&gt;IP-&gt;TCP，连接建立完成</p></li></ul></li><li><p>浏览器开始HTTP访问过程</p><ul><li><p>浏览器想目标服务器发出HTTP-GET/POST/HEAD 方法报文</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">get,post,head请求方法的区别</div><div class="line">get:发送的数据量比较少（最多1024字节），且是明文传输的，数据放在请求协议头中，常用于请求</div><div class="line">post：发送的数据量比较大（无限制），且是密文传输，数据放在实体数据当中，多用于更新站点</div><div class="line">head：只请求指定页面的首部</div></pre></td></tr></table></figure></li><li><p>该HTTP-GET/POST/HEAD报文-&gt;TCP-&gt;IP-&gt;MAC-&gt;网关-&gt;目标主机</p></li><li><p>目标主机收到数据帧-&gt;IP-&gt;TCP-&gt;HTTP，http协议单元会回应HTTP协议格式封装好的HTML超文本形式数据</p></li><li><p>HTTP-HTML数据-&gt;TCP-&gt;IP-&gt;MAC-&gt;网关-&gt;请求主机</p></li><li><p>请求主机收到数据帧-&gt;IP-&gt;TCP-&gt;HTTP-&gt;浏览器，浏览器会以网页形式显示HTML超文本。</p></li></ul></li><li><p>断开TCP连接：TCP断开连接的四次握手</p><ul><li><p>浏览器想目标服务器发出TCP连接结束请求报文</p></li><li><p>该请求TCP报文中的FIN标志位被设置为1，表示结束请求（<strong>第一次握手</strong>）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP结束请求报文-&gt;IP-&gt;MAC-&gt;网关-&gt;目标服务器</div></pre></td></tr></table></figure></li><li><p>目标服务器收到数据帧-&gt;IP-&gt;TCP，TCP协议单元会回应结束应答报文</p></li><li><p>这时候服务器因为还有数据需要发送，只能先确认收到客户端的结束请求报文，也就是发送ACK回应报文，这时候客户端已经没有数据发送了，处于FIN_WAIT状态（<strong>第二次握手</strong>）</p></li><li><p>当服务器数据发送完毕，则向客户端发动FIN报文（<strong>第三次握手</strong>）</p></li><li><p>客户端收到FIN报文后，发送ACK报文后进入TIME_WAIT状态（<strong>第四次握手</strong>）</p></li><li><p>服务器收到ACK后断开连接，客户端在服务器断开连接后关闭连接</p></li></ul></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;URL访问网站&quot;&gt;&lt;a href=&quot;#URL访问网站&quot; class=&quot;headerlink&quot; title=&quot;URL访问网站&quot;&gt;&lt;/a&gt;URL访问网站&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;本地过程&lt;/p&gt;
+&lt;p&gt;若DNS缓存中没有相关数据，则浏览器先向DNS服务器发出D
+      
+    
+    </summary>
+    
+      <category term="网络" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>排序算法</title>
+    <link href="http://yoursite.com/2017/06/28/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2017/06/28/排序算法总结/</id>
+    <published>2017-06-28T13:19:00.000Z</published>
+    <updated>2017-10-11T08:47:33.228Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="各种排序算法思路及代码实现"><a href="#各种排序算法思路及代码实现" class="headerlink" title="各种排序算法思路及代码实现"></a>各种排序算法思路及代码实现</h1><h2 id="1-冒泡排序"><a href="#1-冒泡排序" class="headerlink" title="1. 冒泡排序"></a>1. 冒泡排序</h2><ul><li><p>主要思路：</p><p>通过交换使相邻的两个数编程小数在前大数在后，这样每次遍历活，最大的数就“浮”到了最后，类似于气泡在水中浮到水面的过程。重复n次即可以使数组有序。</p></li><li><p>关键代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">&#123;</div><div class="line"><span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; n - i; j++)</div><div class="line">&#123;</div><div class="line"><span class="keyword">if</span> (array[j-<span class="number">1</span>] &gt;= array[j])</div><div class="line">&#123;</div><div class="line"><span class="keyword">int</span> temp = array[j];</div><div class="line">array[j] = array[j-<span class="number">1</span>];</div><div class="line">array[j-<span class="number">1</span>] = temp;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>完整实现<br><a href="https://github.com/dzqoo/career/blob/master/BubbleSort.java" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/BubbleSort.java</a></p></li></ul><h2 id="2-插入排序"><a href="#2-插入排序" class="headerlink" title="2. 插入排序"></a>2. 插入排序</h2><ul><li><p>主要思路</p><p>每次将一个待排序的数据，插入到前面已经排号序的序列中，直到全部数据插入完成</p></li><li><p>关键代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;<span class="number">0</span> &amp;&amp; array[j-<span class="number">1</span>]&gt;array[j];j--)&#123;</div><div class="line"><span class="keyword">int</span> temp = array[j];</div><div class="line">array[j] = array[j-<span class="number">1</span>];</div><div class="line">array[j-<span class="number">1</span>] = temp;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>完整实现<br><a href="https://github.com/dzqoo/career/blob/master/InsertSort.java" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/InsertSort.java</a></p></li></ul><h2 id="3-选择排序"><a href="#3-选择排序" class="headerlink" title="3.选择排序"></a>3.选择排序</h2><ul><li><p>主要思路<br>数组分成有序区和无序区，初始时整个数组都是无序区，然后每次从无序区选一个最小的元素直接放到有序区的最后，直到整个数组变成有序区。</p></li><li><p>关键代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">min = i;</div><div class="line"><span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;n;j++)&#123;</div><div class="line"><span class="keyword">if</span>(array[j]&lt;array[min])&#123;</div><div class="line">min = j;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">int</span> temp = array[i];</div><div class="line">array[i] = array[min];</div><div class="line">array[min] = temp; </div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>完整实现<br><a href="https://github.com/dzqoo/career/blob/master/SelectSort.java" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/SelectSort.java</a></p></li></ul><h2 id="4-快速排序"><a href="#4-快速排序" class="headerlink" title="4.快速排序"></a>4.快速排序</h2><ul><li><p>基本思想<br>挖坑填数+分治法（取自<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="external">http://blog.csdn.net/morewindows/article/details/6684558</a>）</p><ul><li>先从数列中取出一个数作为基准数，常常是第一个数</li><li>分区过程中，将比这个数大的数全部放到它的右边，小于或者等于它的数全部放在它的左边</li><li>再对左右区间重复第二部，直到各区间质疑后一个数</li></ul></li><li><p>关键代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (l &lt; r)</div><div class="line">&#123;</div><div class="line"><span class="keyword">int</span> i = l, j = r;</div><div class="line"><span class="keyword">int</span> mid = array[l];</div><div class="line"><span class="keyword">while</span> (i &lt; j)</div><div class="line">&#123;</div><div class="line"><span class="keyword">while</span> (i&lt;j &amp;&amp; array[j] &gt;= mid)</div><div class="line">&#123;</div><div class="line">j--;</div><div class="line">&#125;</div><div class="line">array[i] = array[j];</div><div class="line"><span class="keyword">while</span> (i&lt;j &amp;&amp; array[i] &lt;= mid)</div><div class="line">&#123;</div><div class="line">i++;</div><div class="line">&#125;</div><div class="line">array[j] = array[i];</div><div class="line">&#125;</div><div class="line">array[i] = mid;</div><div class="line">quick(array, l, i - <span class="number">1</span>);</div><div class="line">quick(array, i + <span class="number">1</span>, r);</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>完整实现<br><a href="https://github.com/dzqoo/career/blob/master/QuickSort.java" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/QuickSort.java</a></p></li></ul><h2 id="5-归并排序"><a href="#5-归并排序" class="headerlink" title="5.归并排序"></a>5.归并排序</h2><ul><li><p>主要思路<br>当一个数组左边有序，右边也有序，那合并这两个有序数组就完成了排序</p></li><li><p>关键代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">##1.合并数组</div><div class="line"><span class="keyword">int</span> i = left, j = mid + <span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> m = mid, n = right;</div><div class="line"><span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line"><span class="keyword">while</span> (i &lt;= m &amp;&amp; j &lt;= n)</div><div class="line">&#123;</div><div class="line"><span class="keyword">if</span> (array[i] &lt;= array[j])</div><div class="line">&#123;</div><div class="line">temp[k++] = array[i++];</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">temp[k++] = array[j++];</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span> (i &lt;= m)</div><div class="line">&#123;</div><div class="line">temp[k++] = array[i++];</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span> (j &lt;= n)</div><div class="line">&#123;</div><div class="line">temp[k++] = array[j++];</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; i++)</div><div class="line">&#123;</div><div class="line">array[left + i] = temp[i];</div><div class="line">&#125;</div><div class="line">##2.递归调用</div><div class="line"><span class="keyword">if</span> (left &lt; right)</div><div class="line">&#123;</div><div class="line"><span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</div><div class="line">merge(array, left, mid, temp);</div><div class="line">merge(array, mid + <span class="number">1</span>, right, temp);</div><div class="line">mergearray(array, left, mid, right, temp);</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>完整实现<br><a href="https://github.com/dzqoo/career/blob/master/MergeSort.java" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/MergeSort.java</a></p></li></ul><p>​</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;各种排序算法思路及代码实现&quot;&gt;&lt;a href=&quot;#各种排序算法思路及代码实现&quot; class=&quot;headerlink&quot; title=&quot;各种排序算法思路及代码实现&quot;&gt;&lt;/a&gt;各种排序算法思路及代码实现&lt;/h1&gt;&lt;h2 id=&quot;1-冒泡排序&quot;&gt;&lt;a href=&quot;#1-冒
+      
+    
+    </summary>
+    
+      <category term="面试" scheme="http://yoursite.com/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hive 学习笔记</title>
+    <link href="http://yoursite.com/2017/05/11/hive/"/>
+    <id>http://yoursite.com/2017/05/11/hive/</id>
+    <published>2017-05-11T01:53:00.000Z</published>
+    <updated>2017-10-11T08:50:28.185Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、hive的基本特性"><a href="#一、hive的基本特性" class="headerlink" title="一、hive的基本特性"></a>一、hive的基本特性</h1><ol><li>hive是基于Hadoop的一个数据仓库工具，可以将结构化的的数据文件映射为一张数据表，并提供完整的sql查询功能，可以将sql语句转换为MapReduce任务进行运行。</li><li>开发者可以自定义mapper和reducer来处理内建的mapper和reducer</li></ol><h1 id="二、hive和关系数据库的区别"><a href="#二、hive和关系数据库的区别" class="headerlink" title="二、hive和关系数据库的区别"></a>二、hive和关系数据库的区别</h1><ol><li><p>存储的文件系统不同</p></li><li><p>计算模型不同，hive是mapreduce，关系型数据库是自己设计的计算模型</p></li><li><p>相对于关系型数据库，hive的实时性很差，这个主要是因为二者作用的领域不同，关系型数据库是为实时查询业务进行设计的，hive则是为海量数据做挖掘设计的</p></li><li><p>hive更易扩展</p><p>上面是一些宏观的区别，细节上的区别主要有以下几点</p></li><li><p>关系数据库里，表的加载模式是在数据加载时候强制确定的，如果加载数据时候发现加载的数据不符合模式，关系数据库则会拒绝加载数据（写时模式）。Hive在加载数据时候和关系数据库不同，hive在加载数据时候不会对数据进行检查，也不会更改加载的数据文件，而检查数据格式的操作是在查询操作时候执行（读时模式）。</p></li><li><p>关系数据库一个重要的特点是可以对某一行或者某些行的数据进行更新、删除操作，hive不支持读某个具体行的操作，hive对数据的操作只支持覆盖元数据和追加数据。</p></li></ol><h1 id="三、hive的数据类型"><a href="#三、hive的数据类型" class="headerlink" title="三、hive的数据类型"></a>三、hive的数据类型</h1><ol><li><p>基本数据类型对应了java的基本数据类型</p><p>tinyint  -&gt;  byte(1字节)    smallint  -&gt; short(2字节)    int   -&gt;  int(4字节)    bigint   -&gt;   long(8字节)</p><p>float     -&gt;  float(4字节)    double   -&gt;  double(4字节)</p><p>字符串类型用string表示</p></li><li><p>复杂数据类型</p><p>array:一组有序数组，字段的类型必须相同 array(1,2)</p><p>map:一组无序的键值对</p><p>struct：一组命名的字段</p></li></ol><h1 id="四、hive的数据模式"><a href="#四、hive的数据模式" class="headerlink" title="四、hive的数据模式"></a>四、hive的数据模式</h1><ol><li><p>Database</p></li><li><p>table</p><p>托管表：存储在hive的数据仓库里</p><p>外部表：存储在hive的数据仓库或者hive数据仓库外部的分布式文件系统上</p></li><li><p>分区（partition）</p><p>根据“分区列”的值对表的数据进行粗略划分的机制，在hive存储就体现在表的主目录下的一个子目录</p></li><li><p>桶（bucket）</p><p>上面的table和partition都是目录级别的拆分数据，bucket则是对数据源数据文件本身来拆分数据</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;一、hive的基本特性&quot;&gt;&lt;a href=&quot;#一、hive的基本特性&quot; class=&quot;headerlink&quot; title=&quot;一、hive的基本特性&quot;&gt;&lt;/a&gt;一、hive的基本特性&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;hive是基于Hadoop的一个数据仓库工具，可以将结构
+      
+    
+    </summary>
+    
+      <category term="Hive" scheme="http://yoursite.com/categories/Hive/"/>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hadoop 学习笔记</title>
+    <link href="http://yoursite.com/2017/05/07/hadoop/"/>
+    <id>http://yoursite.com/2017/05/07/hadoop/</id>
+    <published>2017-05-07T13:19:00.000Z</published>
+    <updated>2017-10-11T09:04:02.453Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="MR架构"><a href="#MR架构" class="headerlink" title="MR架构"></a>MR架构</h1><h2 id="一、主要组成部分及任务执行流程"><a href="#一、主要组成部分及任务执行流程" class="headerlink" title="一、主要组成部分及任务执行流程"></a>一、主要组成部分及任务执行流程</h2><ol><li>主要组成部分<br>  Job Client：接收用户提交的程序<pre><code>JobTracker: 初始化任务，任务调度TaskTracker: 任务实际执行</code></pre></li><li>任务执行流程<ul><li>JobClient 向JobTracker请求一个新的jobID</li><li>检查作业输出说明</li><li>计算作业输出划分split</li><li>将运行作业所需要的资源（作业的jar文件、配置文件、计算所得的输入划分）复制到一个以作业ID 命名的目录中JobTracker的文件系统</li><li>通过调用JobTracker的submitJob()方法，告诉JobTracker作业准备执行</li><li>JobTracker接受到submitJob方法调用后，把次调用放到一个内部队列中，交由作业调度器进行调度，并对其进行初始化</li><li>创建运行任务列表，作业调度去首先从共享文件系统中获取JobClient已经计算好的输入划分信息，然后为每一个划分创建一个Map任务（一个split对应一个map，有多少个split就有多少map）</li><li>TaskTracker执行一个简单的循环，定期发送心跳（heatbeat）调用JobTracker</li></ul></li></ol><h2 id="二、Map-Shuffle"><a href="#二、Map-Shuffle" class="headerlink" title="二、Map Shuffle"></a>二、Map Shuffle</h2><ol><li>输入<br>  在map task执行时，其输入来源HDFS的block，map task值读取split。split与bloack的对应关系可能是多对一，默认是一对一</li><li>切分<br>  决定于当前的mapper的part交给哪个reduce的方法：mapreduce提供的Partitioner接口，对key进行hash后，再以reducetask数量取模，然后到执行的job上。<pre><code>然后将数据鞋屋内存缓冲区中，缓冲区的作用是批量手机map结果，减少磁盘IO的影响。key/value对已经partition的结果都会写入缓冲区。写入之前，key与value值都会被序列化成字节数组。</code></pre></li><li><p>溢写<br>  由于内存缓冲区的大小限制（默认是100MB），当map task输出结果过很多时就可能发生内存溢出，所以需要在一定条件下降缓冲区的数据临时写入磁盘，然后重新利用这块缓冲区。这个从内存往磁盘写数据的过程就被称为溢写（spill）</p><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">        Combiner 将相同key的key/value对加起来，减少以写splil到磁盘的数据量</div></pre></td></tr></table></figure></code></pre></li><li><p>merge<br>  map很大时，每次溢写会产生一个spill_file，这样会有多个spill_file，而最终的输出只有一个文件，在最终输出之前对对多个中间过程产生的溢写文件进行合并，此过程就是merge</p></li></ol><h2 id="三、Reduce-Shuffle"><a href="#三、Reduce-Shuffle" class="headerlink" title="三、Reduce Shuffle"></a>三、Reduce Shuffle</h2><ol><li>copy<br>  Reduce进程启动一些数据copy线程（Fetcher），通过HTTP方式请求map task所在的TaskTracker获取map task的输出文件。</li><li>merge<br>  copy过来的数据会先放入内存缓冲区中，这里的缓冲区大小要比map端的更为灵活，它是基于JVM的heap size设置的，因为shuffle阶段Reducer不运行，所以应该把绝大部分内存都给Shuffle用。merge有三种形式：1）内存到内存2）内存到磁盘3）磁盘到磁盘。当内存中的数据量到达一定阈值，就启动内存到磁盘的merge。与map端类似，这也是溢写过程，这个过程中如果设置有Combiner，也是会启用的，然后在磁盘中生成众多溢写文件。第二种merge方式一直在运行，直到没有map端的数据时才结束，然后启动第三种磁盘到磁盘的merge方式生成最终的那个文件</li><li>reducer的输入<br>  merge的最后会成一个文件，大多数情况下存在于磁盘中，但是需要将其放入内存中。当reducer输入文件已定，整个shuffle阶段才算结束。然后就是Reducer执行，把结果放到HDFS上。</li></ol><h2 id="四、YARN优于MapReduce的地方"><a href="#四、YARN优于MapReduce的地方" class="headerlink" title="四、YARN优于MapReduce的地方"></a>四、YARN优于MapReduce的地方</h2><ol><li>原MapReduce框架的不足<ul><li>JobTracker是集群事务的集中处理点，存在单点故障</li><li>JobTracker需要完成的任务太多，既要维护job的状态又要维护job的task的状态，造成过多的资源消耗</li><li>在TaskTracker端，用map/reduce作为资源的表示过于简单，没有考虑到cpu、内存等资源情况，当把两个需要消耗大内存的task调度到一起。很容易出现OOM</li><li>把资源强制划分为map/reduce slot，当只有map task时，reduce slot不能用，当只有reduce task时，map slot不能用，很容易造成资源利用不足。</li></ul></li><li>YARN牛逼的地方<br>  基本的思想是将JobTracker的部分职责分配到TaskTracker上，这里的JobTracker被ApplicationMaster代替，TaskTracker被NodeManager代替，同时有一个全局的ResourceManager以主要后台进程的形式运行，它通常在专用机器上运行，在各种竞争的应用程序之间仲裁可用的集群资源。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      介绍MR的基本架构
+    
+    </summary>
+    
+      <category term="hadoop" scheme="http://yoursite.com/categories/hadoop/"/>
+    
+    
+      <category term="理论知识" scheme="http://yoursite.com/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HDFS 学习笔记</title>
+    <link href="http://yoursite.com/2017/05/07/HDFS/"/>
+    <id>http://yoursite.com/2017/05/07/HDFS/</id>
+    <published>2017-05-07T12:36:00.000Z</published>
+    <updated>2017-10-11T08:50:45.330Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h1><h2 id="一、文件读取流程"><a href="#一、文件读取流程" class="headerlink" title="一、文件读取流程"></a>一、文件读取流程</h2><ol><li><p>使用HDFS提供的客户端开发库Client，向远程的Namenode发起RPC请求</p></li><li><p>Namenode会视情况返回文件的部分或者全部block列表，对于每个block，Namenode都会返回有该block拷贝的DataNode地址</p></li><li><p>客户端开发库Client会选取离客户端最接近的DataNode来读取block，如果客户端本身就是DataNode，那么将本地直接获取数据</p></li><li><p>读取完当前block的数据后，关闭与当前DataNode连接，并为读取下一个block寻找最佳的DataNode</p></li><li><p>当读完列表的block后，且文件读取还没有结束，客户端开发库会继续想Namenode获取下一批的block列表</p></li><li><p>读取完一个block都会进行checksum验证，如果读取datanode时出现错误，客户端会通知Namenode，然后再从下一个拥有该block拷贝的datanode继续读。</p></li></ol><h2 id="二、文件写入流程"><a href="#二、文件写入流程" class="headerlink" title="二、文件写入流程"></a>二、文件写入流程</h2><ol><li><p>使用HDFS提供的客户端开发库Client，向远程的Namenode发起RPC请求</p></li><li><p>Namenode会检查要创建的文件是否已经存在，创建者是否有权限进行操作，成功则会为文件创建一个记录，否则会让客户端抛出异常</p></li><li><p>当客户端开始写入文件的时候，开发库会将文件分成多个packets，并在内部以数据队列“data queue”的形式管理这些packets，并向Namenode申请新的blocks，获取用来存储replicas的合适的datanodes列表，列表的大小根据Namenode中对replication的设置而定</p></li><li><p>开始以pipeline的形式将packet写入所有的replicas中。开发库把packet以流的方式写入第一个datanode，该datanode把该packet存储之后，再将其传递在此pipeline中的下一个datanode，直到最后一个datanode，这种写数据的方式呈流水线的形式</p></li><li><p>最后一个datanode成功存储后会返回一个ack packet，在pipeline里传递至客户端，在客户端的开发库内部维护着“ack queue”，成功收到datanode返回的ack packet后会从“ack queue”移除相应的packet。</p></li><li><p>如果传输过程中，有某个datanode出现了故障，那么当前的pipeline会被关闭，出现故障的datanode会从当前的pipeline中移除，剩余的block会继续剩下的datanode中继续以pipeline的形式传输，同时Damenode会分配一个新的datanode，保持replicas设定的数量。</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;HDFS&quot;&gt;&lt;a href=&quot;#HDFS&quot; class=&quot;headerlink&quot; title=&quot;HDFS&quot;&gt;&lt;/a&gt;HDFS&lt;/h1&gt;&lt;h2 id=&quot;一、文件读取流程&quot;&gt;&lt;a href=&quot;#一、文件读取流程&quot; class=&quot;headerlink&quot; title=&quot;一
+      
+    
+    </summary>
+    
+      <category term="hadoop" scheme="http://yoursite.com/categories/hadoop/"/>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《统计学习方法》 学习笔记</title>
+    <link href="http://yoursite.com/2017/02/16/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2017/02/16/统计学习方法/</id>
+    <published>2017-02-16T08:13:00.000Z</published>
+    <updated>2017-10-11T08:50:02.672Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-8-分类问题"><a href="#1-8-分类问题" class="headerlink" title="1.8 分类问题"></a>1.8 分类问题</h1><p>二分类的评价指标是精确率和召回率，分类器在测试数据集上的预测或正确或不正确，有如下四种情况：</p><p>TP:将正确的预测成正确的</p><p>FN:将正确的预测成不正确的</p><p>FP:将不正确的预测成正确的</p><p>TN:将不正确的预测成不正确的</p><p><strong>精确率</strong>关注的是准头，也就是说你预测为正确的结果中有多少是真的正确的，从你预测的结果入手，定义如下</p><p>$p=TP/(TP+FP)$</p><p><strong>召回率</strong>关注的是你能找出多少正确的，也就是说真实结果中是正确的那些结果你能找出多少，从真实的正确的结果入手，所谓召回,定义如下</p><p>$R=TP/(TP+FN)$</p><p>另外，综合考虑这两个参数指标定义了一个$F_1$值，如下</p><p>$2/F_1 = 1/P+1/R$</p><p>精确率和召回率越高，$F_1$也就越大。不过一般情况下，精确率和召回率是相互制约的，此消彼长。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-8-分类问题&quot;&gt;&lt;a href=&quot;#1-8-分类问题&quot; class=&quot;headerlink&quot; title=&quot;1.8 分类问题&quot;&gt;&lt;/a&gt;1.8 分类问题&lt;/h1&gt;&lt;p&gt;二分类的评价指标是精确率和召回率，分类器在测试数据集上的预测或正确或不正确，有如下四种情况：
+      
+    
+    </summary>
+    
+      <category term="统计学习方法" scheme="http://yoursite.com/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+</feed>
