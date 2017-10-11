@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="各种排序算法思路及代码实现1. 冒泡排序 主要思路： 通过交换使相邻的两个数编程小数在前大数在后，这样每次遍历活，最大的数就“浮”到了最后，类似于气泡在水中浮到水面的过程。重复n次即可以使数组有序。  关键代码 123456789101112for (i = 0; i &amp;lt; n; i++)			&amp;#123;				for (j = 1; j &amp;lt; n - i; j++)				&amp;#123;">
+<meta name="description" content="各种排序算法思路及代码实现 1. 冒泡排序  主要思路：  通过交换使相邻的两个数编程小数在前大数在后，这样每次遍历活，最大的数就“浮”到了最后，类似于气泡在水中浮到水面的过程。重复n次即可以使数组有序。  关键代码  123456789101112for (i = 0; i &amp;lt; n; i++)			&amp;#123;				for (j = 1; j &amp;lt; n - i; j">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序算法">
 <meta property="og:url" content="http://yoursite.com/2017/06/28/排序算法总结/index.html">
 <meta property="og:site_name" content="都真全的blog">
-<meta property="og:description" content="各种排序算法思路及代码实现1. 冒泡排序 主要思路： 通过交换使相邻的两个数编程小数在前大数在后，这样每次遍历活，最大的数就“浮”到了最后，类似于气泡在水中浮到水面的过程。重复n次即可以使数组有序。  关键代码 123456789101112for (i = 0; i &amp;lt; n; i++)			&amp;#123;				for (j = 1; j &amp;lt; n - i; j++)				&amp;#123;">
+<meta property="og:description" content="各种排序算法思路及代码实现 1. 冒泡排序  主要思路：  通过交换使相邻的两个数编程小数在前大数在后，这样每次遍历活，最大的数就“浮”到了最后，类似于气泡在水中浮到水面的过程。重复n次即可以使数组有序。  关键代码  123456789101112for (i = 0; i &amp;lt; n; i++)			&amp;#123;				for (j = 1; j &amp;lt; n - i; j">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-11T08:47:33.228Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法">
-<meta name="twitter:description" content="各种排序算法思路及代码实现1. 冒泡排序 主要思路： 通过交换使相邻的两个数编程小数在前大数在后，这样每次遍历活，最大的数就“浮”到了最后，类似于气泡在水中浮到水面的过程。重复n次即可以使数组有序。  关键代码 123456789101112for (i = 0; i &amp;lt; n; i++)			&amp;#123;				for (j = 1; j &amp;lt; n - i; j++)				&amp;#123;">
+<meta name="twitter:description" content="各种排序算法思路及代码实现 1. 冒泡排序  主要思路：  通过交换使相邻的两个数编程小数在前大数在后，这样每次遍历活，最大的数就“浮”到了最后，类似于气泡在水中浮到水面的过程。重复n次即可以使数组有序。  关键代码  123456789101112for (i = 0; i &amp;lt; n; i++)			&amp;#123;				for (j = 1; j &amp;lt; n - i; j">
 
 
 
@@ -374,57 +374,60 @@
       
 
       
-        <h1 id="各种排序算法思路及代码实现"><a href="#各种排序算法思路及代码实现" class="headerlink" title="各种排序算法思路及代码实现"></a>各种排序算法思路及代码实现</h1><h2 id="1-冒泡排序"><a href="#1-冒泡排序" class="headerlink" title="1. 冒泡排序"></a>1. 冒泡排序</h2><ul>
-<li><p>主要思路：</p>
-<p>通过交换使相邻的两个数编程小数在前大数在后，这样每次遍历活，最大的数就“浮”到了最后，类似于气泡在水中浮到水面的过程。重复n次即可以使数组有序。</p>
-</li>
-<li><p>关键代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; n - i; j++)</div><div class="line">				&#123;</div><div class="line">					<span class="keyword">if</span> (array[j-<span class="number">1</span>] &gt;= array[j])</div><div class="line">					&#123;</div><div class="line">						<span class="keyword">int</span> temp = array[j];</div><div class="line">						array[j] = array[j-<span class="number">1</span>];</div><div class="line">						array[j-<span class="number">1</span>] = temp;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>完整实现<br><a href="https://github.com/dzqoo/career/blob/master/BubbleSort.java" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/BubbleSort.java</a></p>
-</li>
-</ul>
-<h2 id="2-插入排序"><a href="#2-插入排序" class="headerlink" title="2. 插入排序"></a>2. 插入排序</h2><ul>
-<li><p>主要思路</p>
-<p>每次将一个待排序的数据，插入到前面已经排号序的序列中，直到全部数据插入完成</p>
-</li>
-<li><p>关键代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;<span class="number">0</span> &amp;&amp; array[j-<span class="number">1</span>]&gt;array[j];j--)&#123;</div><div class="line">				<span class="keyword">int</span> temp = array[j];</div><div class="line">				array[j] = array[j-<span class="number">1</span>];</div><div class="line">				array[j-<span class="number">1</span>] = temp;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>完整实现<br><a href="https://github.com/dzqoo/career/blob/master/InsertSort.java" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/InsertSort.java</a></p>
-</li>
-</ul>
-<h2 id="3-选择排序"><a href="#3-选择排序" class="headerlink" title="3.选择排序"></a>3.选择排序</h2><ul>
-<li><p>主要思路<br>数组分成有序区和无序区，初始时整个数组都是无序区，然后每次从无序区选一个最小的元素直接放到有序区的最后，直到整个数组变成有序区。</p>
-</li>
-<li><p>关键代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">		min = i;</div><div class="line">		<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;n;j++)&#123;</div><div class="line">				<span class="keyword">if</span>(array[j]&lt;array[min])&#123;</div><div class="line">					min = j;</div><div class="line">				&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> temp = array[i];</div><div class="line">		array[i] = array[min];</div><div class="line">		array[min] = temp; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>完整实现<br><a href="https://github.com/dzqoo/career/blob/master/SelectSort.java" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/SelectSort.java</a></p>
-</li>
-</ul>
-<h2 id="4-快速排序"><a href="#4-快速排序" class="headerlink" title="4.快速排序"></a>4.快速排序</h2><ul>
-<li><p>基本思想<br>挖坑填数+分治法（取自<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="external">http://blog.csdn.net/morewindows/article/details/6684558</a>）</p>
+        <h1 id="各种排序算法思路及代码实现">各种排序算法思路及代码实现</h1>
+<h2 id="冒泡排序">1. 冒泡排序</h2>
 <ul>
+<li>主要思路：</li>
+</ul>
+<p>通过交换使相邻的两个数编程小数在前大数在后，这样每次遍历活，最大的数就“浮”到了最后，类似于气泡在水中浮到水面的过程。重复n次即可以使数组有序。</p>
+<ul>
+<li>关键代码</li>
+</ul>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; n - i; j++)</div><div class="line">				&#123;</div><div class="line">					<span class="keyword">if</span> (array[j-<span class="number">1</span>] &gt;= array[j])</div><div class="line">					&#123;</div><div class="line">						<span class="keyword">int</span> temp = array[j];</div><div class="line">						array[j] = array[j-<span class="number">1</span>];</div><div class="line">						array[j-<span class="number">1</span>] = temp;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>完整实现 <a href="https://github.com/dzqoo/career/blob/master/BubbleSort.java" class="uri" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/BubbleSort.java</a></li>
+</ul>
+<h2 id="插入排序">2. 插入排序</h2>
+<ul>
+<li>主要思路</li>
+</ul>
+<p>每次将一个待排序的数据，插入到前面已经排号序的序列中，直到全部数据插入完成</p>
+<ul>
+<li>关键代码</li>
+</ul>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;<span class="number">0</span> &amp;&amp; array[j-<span class="number">1</span>]&gt;array[j];j--)&#123;</div><div class="line">				<span class="keyword">int</span> temp = array[j];</div><div class="line">				array[j] = array[j-<span class="number">1</span>];</div><div class="line">				array[j-<span class="number">1</span>] = temp;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>完整实现 <a href="https://github.com/dzqoo/career/blob/master/InsertSort.java" class="uri" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/InsertSort.java</a></li>
+</ul>
+<h2 id="选择排序">3.选择排序</h2>
+<ul>
+<li><p>主要思路 数组分成有序区和无序区，初始时整个数组都是无序区，然后每次从无序区选一个最小的元素直接放到有序区的最后，直到整个数组变成有序区。</p></li>
+<li><p>关键代码</p></li>
+</ul>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">		min = i;</div><div class="line">		<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;n;j++)&#123;</div><div class="line">				<span class="keyword">if</span>(array[j]&lt;array[min])&#123;</div><div class="line">					min = j;</div><div class="line">				&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> temp = array[i];</div><div class="line">		array[i] = array[min];</div><div class="line">		array[min] = temp; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>完整实现 <a href="https://github.com/dzqoo/career/blob/master/SelectSort.java" class="uri" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/SelectSort.java</a></li>
+</ul>
+<h2 id="快速排序">4.快速排序</h2>
+<ul>
+<li><p>基本思想 挖坑填数+分治法（取自<a href="http://blog.csdn.net/morewindows/article/details/6684558" class="uri" target="_blank" rel="external">http://blog.csdn.net/morewindows/article/details/6684558</a>）</p></li>
 <li>先从数列中取出一个数作为基准数，常常是第一个数</li>
 <li>分区过程中，将比这个数大的数全部放到它的右边，小于或者等于它的数全部放在它的左边</li>
-<li>再对左右区间重复第二部，直到各区间质疑后一个数</li>
+<li><p>再对左右区间重复第二部，直到各区间质疑后一个数</p></li>
+<li><p>关键代码</p></li>
 </ul>
-</li>
-<li><p>关键代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (l &lt; r)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">int</span> i = l, j = r;</div><div class="line">			<span class="keyword">int</span> mid = array[l];</div><div class="line">			<span class="keyword">while</span> (i &lt; j)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">while</span> (i&lt;j &amp;&amp; array[j] &gt;= mid)</div><div class="line">				&#123;</div><div class="line">					j--;</div><div class="line">				&#125;</div><div class="line">				array[i] = array[j];</div><div class="line">				<span class="keyword">while</span> (i&lt;j &amp;&amp; array[i] &lt;= mid)</div><div class="line">				&#123;</div><div class="line">					i++;</div><div class="line">				&#125;</div><div class="line">				array[j] = array[i];</div><div class="line">			&#125;</div><div class="line">			array[i] = mid;</div><div class="line">			quick(array, l, i - <span class="number">1</span>);</div><div class="line">			quick(array, i + <span class="number">1</span>, r);</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>完整实现<br><a href="https://github.com/dzqoo/career/blob/master/QuickSort.java" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/QuickSort.java</a></p>
-</li>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (l &lt; r)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">int</span> i = l, j = r;</div><div class="line">			<span class="keyword">int</span> mid = array[l];</div><div class="line">			<span class="keyword">while</span> (i &lt; j)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">while</span> (i&lt;j &amp;&amp; array[j] &gt;= mid)</div><div class="line">				&#123;</div><div class="line">					j--;</div><div class="line">				&#125;</div><div class="line">				array[i] = array[j];</div><div class="line">				<span class="keyword">while</span> (i&lt;j &amp;&amp; array[i] &lt;= mid)</div><div class="line">				&#123;</div><div class="line">					i++;</div><div class="line">				&#125;</div><div class="line">				array[j] = array[i];</div><div class="line">			&#125;</div><div class="line">			array[i] = mid;</div><div class="line">			quick(array, l, i - <span class="number">1</span>);</div><div class="line">			quick(array, i + <span class="number">1</span>, r);</div><div class="line">		&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>完整实现 <a href="https://github.com/dzqoo/career/blob/master/QuickSort.java" class="uri" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/QuickSort.java</a></li>
 </ul>
-<h2 id="5-归并排序"><a href="#5-归并排序" class="headerlink" title="5.归并排序"></a>5.归并排序</h2><ul>
-<li><p>主要思路<br>当一个数组左边有序，右边也有序，那合并这两个有序数组就完成了排序</p>
-</li>
-<li><p>关键代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">##1.合并数组</div><div class="line"><span class="keyword">int</span> i = left, j = mid + <span class="number">1</span>;</div><div class="line">		<span class="keyword">int</span> m = mid, n = right;</div><div class="line">		<span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">		<span class="keyword">while</span> (i &lt;= m &amp;&amp; j &lt;= n)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span> (array[i] &lt;= array[j])</div><div class="line">			&#123;</div><div class="line">				temp[k++] = array[i++];</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span></div><div class="line">			&#123;</div><div class="line">				temp[k++] = array[j++];</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">while</span> (i &lt;= m)</div><div class="line">		&#123;</div><div class="line">			temp[k++] = array[i++];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">while</span> (j &lt;= n)</div><div class="line">		&#123;</div><div class="line">			temp[k++] = array[j++];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; i++)</div><div class="line">		&#123;</div><div class="line">			array[left + i] = temp[i];</div><div class="line">		&#125;</div><div class="line">##2.递归调用</div><div class="line"><span class="keyword">if</span> (left &lt; right)</div><div class="line">	&#123;</div><div class="line">			<span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</div><div class="line">			merge(array, left, mid, temp);</div><div class="line">			merge(array, mid + <span class="number">1</span>, right, temp);</div><div class="line">			mergearray(array, left, mid, right, temp);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>完整实现<br><a href="https://github.com/dzqoo/career/blob/master/MergeSort.java" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/MergeSort.java</a></p>
-</li>
+<h2 id="归并排序">5.归并排序</h2>
+<ul>
+<li><p>主要思路 当一个数组左边有序，右边也有序，那合并这两个有序数组就完成了排序</p></li>
+<li><p>关键代码</p></li>
+</ul>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">##1.合并数组</div><div class="line"><span class="keyword">int</span> i = left, j = mid + <span class="number">1</span>;</div><div class="line">		<span class="keyword">int</span> m = mid, n = right;</div><div class="line">		<span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">		<span class="keyword">while</span> (i &lt;= m &amp;&amp; j &lt;= n)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span> (array[i] &lt;= array[j])</div><div class="line">			&#123;</div><div class="line">				temp[k++] = array[i++];</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span></div><div class="line">			&#123;</div><div class="line">				temp[k++] = array[j++];</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">while</span> (i &lt;= m)</div><div class="line">		&#123;</div><div class="line">			temp[k++] = array[i++];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">while</span> (j &lt;= n)</div><div class="line">		&#123;</div><div class="line">			temp[k++] = array[j++];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; k; i++)</div><div class="line">		&#123;</div><div class="line">			array[left + i] = temp[i];</div><div class="line">		&#125;</div><div class="line">##2.递归调用</div><div class="line"><span class="keyword">if</span> (left &lt; right)</div><div class="line">	&#123;</div><div class="line">			<span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</div><div class="line">			merge(array, left, mid, temp);</div><div class="line">			merge(array, mid + <span class="number">1</span>, right, temp);</div><div class="line">			mergearray(array, left, mid, right, temp);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>完整实现 <a href="https://github.com/dzqoo/career/blob/master/MergeSort.java" class="uri" target="_blank" rel="external">https://github.com/dzqoo/career/blob/master/MergeSort.java</a></li>
 </ul>
 <p>​</p>
 
@@ -614,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#各种排序算法思路及代码实现"><span class="nav-number">1.</span> <span class="nav-text">各种排序算法思路及代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-冒泡排序"><span class="nav-number">1.1.</span> <span class="nav-text">1. 冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-插入排序"><span class="nav-number">1.2.</span> <span class="nav-text">2. 插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-选择排序"><span class="nav-number">1.3.</span> <span class="nav-text">3.选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-快速排序"><span class="nav-number">1.4.</span> <span class="nav-text">4.快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-归并排序"><span class="nav-number">1.5.</span> <span class="nav-text">5.归并排序</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#各种排序算法思路及代码实现"><span class="nav-number">1.</span> <span class="nav-text">各种排序算法思路及代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.1.</span> <span class="nav-text">1. 冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">1.2.</span> <span class="nav-text">2. 插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">1.3.</span> <span class="nav-text">3.选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">1.4.</span> <span class="nav-text">4.快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">1.5.</span> <span class="nav-text">5.归并排序</span></a></li></ol></li></ol></div>
             
 
           </div>

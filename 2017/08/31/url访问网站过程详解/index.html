@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="URL访问网站 本地过程 若DNS缓存中没有相关数据，则浏览器先向DNS服务器发出DNS请求，返回DNS对应的IP地址 12345678DNS请求阶段：DNS服务单元生成DNS报文—&amp;gt;UDP协议单元-&amp;gt;IP协议单元-&amp;gt;数据帧，这个过程包含了ARP解析DNS服务器接收阶段：接收到数据帧-&amp;gt;IP协议单元-&amp;gt;UDP协议单元-&amp;gt;DNS服务单元将域名解析成ip地址DNS回">
+<meta name="description" content="URL访问网站  本地过程  若DNS缓存中没有相关数据，则浏览器先向DNS服务器发出DNS请求，返回DNS对应的IP地址 12345678DNS请求阶段：DNS服务单元生成DNS报文—&amp;gt;UDP协议单元-&amp;gt;IP协议单元-&amp;gt;数据帧，这个过程包含了ARP解析DNS服务器接收阶段：接收到数据帧-&amp;gt;IP协议单元-&amp;gt;UDP协议单元-&amp;gt;DNS服务单元将域名解析成i">
 <meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="URL 访问网站的整个过程">
 <meta property="og:url" content="http://yoursite.com/2017/08/31/url访问网站过程详解/index.html">
 <meta property="og:site_name" content="都真全的blog">
-<meta property="og:description" content="URL访问网站 本地过程 若DNS缓存中没有相关数据，则浏览器先向DNS服务器发出DNS请求，返回DNS对应的IP地址 12345678DNS请求阶段：DNS服务单元生成DNS报文—&amp;gt;UDP协议单元-&amp;gt;IP协议单元-&amp;gt;数据帧，这个过程包含了ARP解析DNS服务器接收阶段：接收到数据帧-&amp;gt;IP协议单元-&amp;gt;UDP协议单元-&amp;gt;DNS服务单元将域名解析成ip地址DNS回">
+<meta property="og:description" content="URL访问网站  本地过程  若DNS缓存中没有相关数据，则浏览器先向DNS服务器发出DNS请求，返回DNS对应的IP地址 12345678DNS请求阶段：DNS服务单元生成DNS报文—&amp;gt;UDP协议单元-&amp;gt;IP协议单元-&amp;gt;数据帧，这个过程包含了ARP解析DNS服务器接收阶段：接收到数据帧-&amp;gt;IP协议单元-&amp;gt;UDP协议单元-&amp;gt;DNS服务单元将域名解析成i">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-11T08:50:17.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="URL 访问网站的整个过程">
-<meta name="twitter:description" content="URL访问网站 本地过程 若DNS缓存中没有相关数据，则浏览器先向DNS服务器发出DNS请求，返回DNS对应的IP地址 12345678DNS请求阶段：DNS服务单元生成DNS报文—&amp;gt;UDP协议单元-&amp;gt;IP协议单元-&amp;gt;数据帧，这个过程包含了ARP解析DNS服务器接收阶段：接收到数据帧-&amp;gt;IP协议单元-&amp;gt;UDP协议单元-&amp;gt;DNS服务单元将域名解析成ip地址DNS回">
+<meta name="twitter:description" content="URL访问网站  本地过程  若DNS缓存中没有相关数据，则浏览器先向DNS服务器发出DNS请求，返回DNS对应的IP地址 12345678DNS请求阶段：DNS服务单元生成DNS报文—&amp;gt;UDP协议单元-&amp;gt;IP协议单元-&amp;gt;数据帧，这个过程包含了ARP解析DNS服务器接收阶段：接收到数据帧-&amp;gt;IP协议单元-&amp;gt;UDP协议单元-&amp;gt;DNS服务单元将域名解析成i">
 
 
 
@@ -374,65 +374,50 @@
       
 
       
-        <h1 id="URL访问网站"><a href="#URL访问网站" class="headerlink" title="URL访问网站"></a>URL访问网站</h1><ol>
-<li><p>本地过程</p>
+        <h1 id="url访问网站">URL访问网站</h1>
+<ol style="list-style-type: decimal">
+<li>本地过程</li>
+</ol>
 <p>若DNS缓存中没有相关数据，则浏览器先向DNS服务器发出DNS请求，返回DNS对应的IP地址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">DNS请求阶段：</div><div class="line">DNS服务单元生成DNS报文—&gt;UDP协议单元-&gt;IP协议单元-&gt;数据帧，这个过程包含了ARP解析</div><div class="line">DNS服务器接收阶段：</div><div class="line">接收到数据帧-&gt;IP协议单元-&gt;UDP协议单元-&gt;DNS服务单元将域名解析成ip地址</div><div class="line">DNS回应阶段：</div><div class="line">DNS回应报文-&gt;UDP协议单元-&gt;IP协议单元-&gt;数据帧(MAC)-&gt;请求域名解析的主机</div><div class="line">DNS解析结果接收阶段：</div><div class="line">数据帧-&gt;IP协议单元-&gt;UDP协议单元-&gt;DNS-&gt;浏览器</div></pre></td></tr></table></figure>
-</li>
-<li><p>浏览器与目标服务器建立TCP连接：三次握手</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">DNS请求阶段：</div><div class="line">DNS服务单元生成DNS报文—&gt;UDP协议单元-&gt;IP协议单元-&gt;数据帧，这个过程包含了ARP解析</div><div class="line">DNS服务器接收阶段：</div><div class="line">接收到数据帧-&gt;IP协议单元-&gt;UDP协议单元-&gt;DNS服务单元将域名解析成ip地址</div><div class="line">DNS回应阶段：</div><div class="line">DNS回应报文-&gt;UDP协议单元-&gt;IP协议单元-&gt;数据帧(MAC)-&gt;请求域名解析的主机</div><div class="line">DNS解析结果接收阶段：</div><div class="line">数据帧-&gt;IP协议单元-&gt;UDP协议单元-&gt;DNS-&gt;浏览器</div></pre></td></tr></table></figure></p>
+<ol start="2" style="list-style-type: decimal">
+<li>浏览器与目标服务器建立TCP连接：三次握手</li>
+</ol>
 <ul>
 <li><p>浏览器想服务器发送TCP连接请求报文，请求TCP报文中的SYN标志位被设置为1，表示连接请求（<strong>第一次握手</strong>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP请求报文-&gt;IP-&gt;MAC-&gt;网关-&gt;请求服务器</div></pre></td></tr></table></figure>
-</li>
-<li><p>服务器收到数据帧，传送到上层的IP，TCP，TCP协议单元回应请求应答报文</p>
-</li>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP请求报文-&gt;IP-&gt;MAC-&gt;网关-&gt;请求服务器</div></pre></td></tr></table></figure></p></li>
+<li><p>服务器收到数据帧，传送到上层的IP，TCP，TCP协议单元回应请求应答报文</p></li>
 <li><p>请求应答TCP报文中的SYN和ACK标志位俊被设置成1，表示连接请求应答（<strong>第二次握手</strong>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP请求应答报文-&gt;IP-&gt;MAC-&gt;网关-&gt;请求主机</div></pre></td></tr></table></figure>
-</li>
-<li><p>请求主机收到数据帧，发送到上层的IP，TCP，TCP协议单元会回应请求确认报文</p>
-</li>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP请求应答报文-&gt;IP-&gt;MAC-&gt;网关-&gt;请求主机</div></pre></td></tr></table></figure></p></li>
+<li><p>请求主机收到数据帧，发送到上层的IP，TCP，TCP协议单元会回应请求确认报文</p></li>
 <li><p>请求应答TCP报文中的ACK标志位被设置成1，表示连接请求报文（<strong>第三次握手</strong>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP请求确认报文-&gt;IP-&gt;MAC-&gt;网关-&gt;目标服务器</div></pre></td></tr></table></figure>
-</li>
-<li><p>目标服务器收到数据帧-&gt;IP-&gt;TCP，连接建立完成</p>
-</li>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP请求确认报文-&gt;IP-&gt;MAC-&gt;网关-&gt;目标服务器</div></pre></td></tr></table></figure></p></li>
+<li><p>目标服务器收到数据帧-&gt;IP-&gt;TCP，连接建立完成</p></li>
 </ul>
-</li>
-<li><p>浏览器开始HTTP访问过程</p>
+<ol start="3" style="list-style-type: decimal">
+<li>浏览器开始HTTP访问过程</li>
+</ol>
 <ul>
 <li><p>浏览器想目标服务器发出HTTP-GET/POST/HEAD 方法报文</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">get,post,head请求方法的区别</div><div class="line">get:发送的数据量比较少（最多1024字节），且是明文传输的，数据放在请求协议头中，常用于请求</div><div class="line">post：发送的数据量比较大（无限制），且是密文传输，数据放在实体数据当中，多用于更新站点</div><div class="line">head：只请求指定页面的首部</div></pre></td></tr></table></figure>
-</li>
-<li><p>该HTTP-GET/POST/HEAD报文-&gt;TCP-&gt;IP-&gt;MAC-&gt;网关-&gt;目标主机</p>
-</li>
-<li><p>目标主机收到数据帧-&gt;IP-&gt;TCP-&gt;HTTP，http协议单元会回应HTTP协议格式封装好的HTML超文本形式数据</p>
-</li>
-<li><p>HTTP-HTML数据-&gt;TCP-&gt;IP-&gt;MAC-&gt;网关-&gt;请求主机</p>
-</li>
-<li><p>请求主机收到数据帧-&gt;IP-&gt;TCP-&gt;HTTP-&gt;浏览器，浏览器会以网页形式显示HTML超文本。</p>
-</li>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">get,post,head请求方法的区别</div><div class="line">get:发送的数据量比较少（最多1024字节），且是明文传输的，数据放在请求协议头中，常用于请求</div><div class="line">post：发送的数据量比较大（无限制），且是密文传输，数据放在实体数据当中，多用于更新站点</div><div class="line">head：只请求指定页面的首部</div></pre></td></tr></table></figure></p></li>
+<li><p>该HTTP-GET/POST/HEAD报文-&gt;TCP-&gt;IP-&gt;MAC-&gt;网关-&gt;目标主机</p></li>
+<li><p>目标主机收到数据帧-&gt;IP-&gt;TCP-&gt;HTTP，http协议单元会回应HTTP协议格式封装好的HTML超文本形式数据</p></li>
+<li><p>HTTP-HTML数据-&gt;TCP-&gt;IP-&gt;MAC-&gt;网关-&gt;请求主机</p></li>
+<li><p>请求主机收到数据帧-&gt;IP-&gt;TCP-&gt;HTTP-&gt;浏览器，浏览器会以网页形式显示HTML超文本。</p></li>
 </ul>
-</li>
-<li><p>断开TCP连接：TCP断开连接的四次握手</p>
-<ul>
-<li><p>浏览器想目标服务器发出TCP连接结束请求报文</p>
-</li>
-<li><p>该请求TCP报文中的FIN标志位被设置为1，表示结束请求（<strong>第一次握手</strong>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP结束请求报文-&gt;IP-&gt;MAC-&gt;网关-&gt;目标服务器</div></pre></td></tr></table></figure>
-</li>
-<li><p>目标服务器收到数据帧-&gt;IP-&gt;TCP，TCP协议单元会回应结束应答报文</p>
-</li>
-<li><p>这时候服务器因为还有数据需要发送，只能先确认收到客户端的结束请求报文，也就是发送ACK回应报文，这时候客户端已经没有数据发送了，处于FIN_WAIT状态（<strong>第二次握手</strong>）</p>
-</li>
-<li><p>当服务器数据发送完毕，则向客户端发动FIN报文（<strong>第三次握手</strong>）</p>
-</li>
-<li><p>客户端收到FIN报文后，发送ACK报文后进入TIME_WAIT状态（<strong>第四次握手</strong>）</p>
-</li>
-<li><p>服务器收到ACK后断开连接，客户端在服务器断开连接后关闭连接</p>
-</li>
-</ul>
-</li>
+<ol start="4" style="list-style-type: decimal">
+<li>断开TCP连接：TCP断开连接的四次握手</li>
 </ol>
+<ul>
+<li><p>浏览器想目标服务器发出TCP连接结束请求报文</p></li>
+<li><p>该请求TCP报文中的FIN标志位被设置为1，表示结束请求（<strong>第一次握手</strong>）</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TCP结束请求报文-&gt;IP-&gt;MAC-&gt;网关-&gt;目标服务器</div></pre></td></tr></table></figure></p></li>
+<li><p>目标服务器收到数据帧-&gt;IP-&gt;TCP，TCP协议单元会回应结束应答报文</p></li>
+<li><p>这时候服务器因为还有数据需要发送，只能先确认收到客户端的结束请求报文，也就是发送ACK回应报文，这时候客户端已经没有数据发送了，处于FIN_WAIT状态（<strong>第二次握手</strong>）</p></li>
+<li><p>当服务器数据发送完毕，则向客户端发动FIN报文（<strong>第三次握手</strong>）</p></li>
+<li><p>客户端收到FIN报文后，发送ACK报文后进入TIME_WAIT状态（<strong>第四次握手</strong>）</p></li>
+<li><p>服务器收到ACK后断开连接，客户端在服务器断开连接后关闭连接</p></li>
+</ul>
 
       
     </div>
@@ -616,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#URL访问网站"><span class="nav-number">1.</span> <span class="nav-text">URL访问网站</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#url访问网站"><span class="nav-number">1.</span> <span class="nav-text">URL访问网站</span></a></li></ol></div>
             
 
           </div>
