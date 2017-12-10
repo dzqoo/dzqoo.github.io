@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-12-03T01:30:41.526Z</updated>
+  <updated>2017-12-10T10:50:22.406Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,19 +21,17 @@
     <link href="http://yoursite.com/2017/12/02/2017-12-2-Scala%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B000/"/>
     <id>http://yoursite.com/2017/12/02/2017-12-2-Scala 学习笔记00/</id>
     <published>2017-12-02T12:30:00.000Z</published>
-    <updated>2017-12-03T01:30:41.526Z</updated>
+    <updated>2017-12-10T10:50:22.406Z</updated>
     
-    <content type="html"><![CDATA[<ul><li>content {:toc} # Scala学习进阶过程</li></ul><p>（参考文献：http://www.scala-lang.org/old/node/8610）</p><p>Level A1：Beginning application programmer</p><ul><li>类Java的申明和表达式：standard operator,method calls,conditionals,loops,try/catch</li><li>Class,object,def,val,var,import,package</li><li>Infix notation(中缀表达式) for method calls</li><li>Simple closures(闭包)</li><li>Collections with map,filter, etc.</li><li>for-expresstions</li></ul><p>Level A2：Intermediate application programmer</p><ul><li>Pattern matching</li><li>Trait(特质) composition</li><li>Recursion(递归),in particular tail recursion</li><li>XML literals(字面量)</li></ul><p>Level A3：Expert application programmer</p><ul><li>Folds，i.e. methods such as foldLeft,foldRight</li><li>Streams and other lazy data structures</li><li>Actors</li><li>Combinator parsers</li></ul><p>Level L1：Junior library designer</p><ul><li>Type parameters</li><li>Traits</li><li>Lazy vals</li><li>Control abstraction,currying</li><li>By-name parameters</li></ul><p>Level L2：Senior library designer</p><ul><li>Variance annotations</li><li>Existential types(e.g.,to interface with Java wildcards(通配符))</li><li>Self type annotations and the cake pattern for dependency injection</li><li>Structural types(aka static duck typing)</li><li>Defining map/flatmap/withFilter for new kind of for-expressions</li><li>Extractors</li></ul><p>Level L3：Expert library designer</p><ul><li>Early initializers</li><li>Abstract types</li><li>Implicit(隐性的) definitions</li><li>Higher-kinded types</li></ul><p>A1，A2，A3代表的是普通Scala开发者的技能进阶，L1，L2，L3代表的是Scala库开发者的技能进阶，难度排序差不多是这样的</p><p>A1,A2/L1,A3/L2,L3</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="scala学习进阶过程">Scala学习进阶过程</h1><p>（参考文献：http://www.scala-lang.org/old/node/8610）</p><p>Level A1：Beginning application programmer</p><ul><li>类Java的申明和表达式：standard operator,method calls,conditionals,loops,try/catch</li><li>Class,object,def,val,var,import,package</li><li>Infix notation(中缀表达式) for method calls</li><li>Simple closures(闭包)</li><li>Collections with map,filter, etc.</li><li>for-expresstions</li></ul><p>Level A2：Intermediate application programmer</p><ul><li>Pattern matching</li><li>Trait(特质) composition</li><li>Recursion(递归),in particular tail recursion</li><li>XML literals(字面量)</li></ul><p>Level A3：Expert application programmer</p><ul><li>Folds，i.e. methods such as foldLeft,foldRight</li><li>Streams and other lazy data structures</li><li>Actors</li><li>Combinator parsers</li></ul><p>Level L1：Junior library designer</p><ul><li>Type parameters</li><li>Traits</li><li>Lazy vals</li><li>Control abstraction,currying</li><li>By-name parameters</li></ul><p>Level L2：Senior library designer</p><ul><li>Variance annotations</li><li>Existential types(e.g.,to interface with Java wildcards(通配符))</li><li>Self type annotations and the cake pattern for dependency injection</li><li>Structural types(aka static duck typing)</li><li>Defining map/flatmap/withFilter for new kind of for-expressions</li><li>Extractors</li></ul><p>Level L3：Expert library designer</p><ul><li>Early initializers</li><li>Abstract types</li><li>Implicit(隐性的) definitions</li><li>Higher-kinded types</li></ul><p>A1，A2，A3代表的是普通Scala开发者的技能进阶，L1，L2，L3代表的是Scala库开发者的技能进阶，难度排序差不多是这样的</p><p>A1,A2/L1,A3/L2,L3</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;ul&gt;
-&lt;li&gt;content {:toc} # Scala学习进阶过程&lt;/li&gt;
-&lt;/ul&gt;
+        &lt;h1 id=&quot;scala学习进阶过程&quot;&gt;Scala学习进阶过程&lt;/h1&gt;
 &lt;p&gt;（参考文献：http://www.scala-lang.org/old/node/8610）&lt;/p&gt;
-&lt;p&gt;Level A1：Beginning application
+&lt;p&gt;Level A1：Beginning application programmer&lt;/
       
     
     </summary>
